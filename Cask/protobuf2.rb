@@ -5,7 +5,7 @@ cask "protobuf2" do
   url "https://github.com/protocolbuffers/protobuf/releases/download/v#{version}/protobuf-#{version}.tar.gz"
   name "Google Protobuf v#{version}"
   desc "Google Protocol Buffers v#{version}"
-  homepage "https://github.com/daggerok/homebrew=protobuf2"
+  homepage "https://github.com/protocolbuffers/protobuf"
 
   def install
     # Don't build in debug mode. See:
