@@ -9,6 +9,8 @@ class Protobuf2 < Formula
   license :mit
   url "https://github.com/protocolbuffers/protobuf/releases/download/v#{version}/protobuf-#{version}.tar.gz"
 
+  option :universal
+
   def install
     # Don't build in debug mode. See:
     # https://github.com/Homebrew/homebrew/issues/9279
