@@ -1,6 +1,4 @@
-require 'formula'
-
-class Protobuf2 < Formula
+cask "protobuf2" do
   version "2.5.0"
   name "Google Protobuf v#{version}"
   desc "Google Protocol Buffers v#{version}"
