@@ -56,8 +56,6 @@ cask "protobuf2" do
 end
 ----
 
-////
-
 [source, bash]
 ----
 # output:
@@ -67,6 +65,8 @@ end
 # This may change in the future, so we recommend setting EDITOR,
 # or HOMEBREW_EDITOR to your preferred text editor.
 ----
+
+////
 
 [source, bash]
 ----
