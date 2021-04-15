@@ -1,0 +1,116 @@
+= protobuf 2.x
+We need protobuf 2.5.0!
+
+== how 2
+
+[source, bash]
+----
+$ brew create --cask protobuf2 --tap daggerok/protobuf2 --set-name protobuf2
+----
+
+[source, ruby]
+----
+cask "protobuf2" do
+  name "protobuf2"
+  version "2.5.0"
+  desc "Google Protocol Buffers v#{version}"
+  homepage "https://github.com/daggerok/protobuf2"
+  sha256 "c55aa3dc538e6fd5eaf732f4eb6b98bdcb7cedb5b91d3b5bdcf29c98c293f58e"
+  license "BSD-3-Clause"
+
+  url "https://github.com/protocolbuffers/protobuf/releases/download/v#{version}/protobuf-#{version}.tar.gz,
+      verified: "github.com/daggerok/protobuf2"
+
+  def install
+    # Don't build in debug mode. See:
+    # https://github.com/Homebrew/homebrew/issues/9279
+    # https://github.com/protocolbuffers/protobuf/blob/5c24564811c08772d090305be36fae82d8f12bbe/configure.ac#L61
+    ENV.prepend "CXXFLAGS", "-DNDEBUG"
+    ENV.cxx11
+
+    system "./configure", "CC=clang", "CXX=clang++", "CXXFLAGS='-std=c++11 -stdlib=libc++ -O3 -g'",
+                          "LDFLAGS='-stdlib=libc++'", "LIBS='-lc++ -lc++abi'"
+    # system "./configure", "--disable-debug", "--disable-dependency-tracking",
+    #                       "--prefix=#{prefix}", "--with-zlib"
+    system "make"
+    system "make", "check"
+    system "make", "install"
+
+    # ENV.append_to_cflags "-I#{include}"
+    # ENV.append_to_cflags "-L#{lib}"
+  end
+
+  # test do
+  #   testdata = <<~EOS
+  #     syntax = "proto3";
+  #     package test;
+  #     message TestCase {
+  #       string name = 4;
+  #     }
+  #     message Test {
+  #       repeated TestCase case = 1;
+  #     }
+  #   EOS
+  #   (testpath/"test.proto").write testdata
+  # end
+end
+----
+
+////
+
+[source, bash]
+----
+# output:
+# Please run `brew audit --cask --new protobuf2` before submitting, thanks.
+# Editing /Users/maksim.kostromin/.local/brew/Library/Taps/daggerok/homebrew-protobuf2/Casks/protobuf2.rb
+# Warning: Using vim because no editor was set in the environment.
+# This may change in the future, so we recommend setting EDITOR,
+# or HOMEBREW_EDITOR to your preferred text editor.
+----
+
+[source, bash]
+----
+$ brew create --cask protobuf2 --tap daggerok/protobuf2 --set-name protobuf2
+# Initialized empty Git repository in /usr/local/Homebrew/Library/Taps/daggerok/homebrew-protobuf2/.git/
+# [master (root-commit) 2476389] Create daggerok/protobuf2 tap
+#  3 files changed, 88 insertions(+)
+#  create mode 100644 .github/workflows/publish.yml
+#  create mode 100644 .github/workflows/tests.yml
+#  create mode 100644 README.md
+# ==> Created daggerok/protobuf2
+# /usr/local/Homebrew/Library/Taps/daggerok/homebrew-protobuf2
+# 
+# When a pull request making changes to a formula (or formulae) becomes green
+# (all checks passed), then you can publish the built bottles.
+# To do so, label your PR as `pr-pull` and the workflow will be triggered.
+
+$ cd $(brew --repo daggerok/protobuf2) ; pwd
+# /usr/local/Homebrew/Library/Taps/daggerok/homebrew-protobuf2
+
+$ 
+----
+
+
+[source, bash]
+----
+$ brew tap-new daggerok/protobuf2
+# Initialized empty Git repository in /usr/local/Homebrew/Library/Taps/daggerok/homebrew-protobuf2/.git/
+# [master (root-commit) 2476389] Create daggerok/protobuf2 tap
+#  3 files changed, 88 insertions(+)
+#  create mode 100644 .github/workflows/publish.yml
+#  create mode 100644 .github/workflows/tests.yml
+#  create mode 100644 README.md
+# ==> Created daggerok/protobuf2
+# /usr/local/Homebrew/Library/Taps/daggerok/homebrew-protobuf2
+# 
+# When a pull request making changes to a formula (or formulae) becomes green
+# (all checks passed), then you can publish the built bottles.
+# To do so, label your PR as `pr-pull` and the workflow will be triggered.
+
+$ cd $(brew --repo daggerok/protobuf2) ; pwd
+# /usr/local/Homebrew/Library/Taps/daggerok/homebrew-protobuf2
+
+$ 
+----
+
+////
