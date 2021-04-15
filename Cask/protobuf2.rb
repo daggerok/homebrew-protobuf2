@@ -1,13 +1,14 @@
 cask "protobuf2" do
   version "2.5.0"
-  name "Google Protobuf v#{version}"
-  desc "Google Protocol Buffers v#{version}"
-  homepage "https://github.com/daggerok/protobuf2"
   sha256 "c55aa3dc538e6fd5eaf732f4eb6b98bdcb7cedb5b91d3b5bdcf29c98c293f58e"
-  license :mit
+
   url "https://github.com/protocolbuffers/protobuf/releases/download/v#{version}/protobuf-#{version}.tar.gz"
 
-  option :universal
+  name "Google Protobuf v#{version}"
+  desc "Google Protocol Buffers v#{version}"
+
+  homepage "https://github.com/daggerok/protobuf2"
+  license :mit
 
   def install
     # Don't build in debug mode. See:
