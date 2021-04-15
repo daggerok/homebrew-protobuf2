@@ -5,6 +5,15 @@ We need protobuf 2.5.0!
 
 [source, bash]
 ----
+wget -qO- https://github.com/google/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.bz2 | tar xvf - -C /tmp
+cd /tmp/protobuf-2.5.0 ; ./configure CC=clang CXX=clang++ CXXFLAGS='-std=c++11 -stdlib=libc++ -O3 -g' LDFLAGS='-stdlib=libc++' LIBS="-lc++ -lc++abi"
+make -j 4 ; sudo make install ; /usr/local/bin/protoc --version
+----
+
+////
+
+[source, bash]
+----
 $ brew create --cask protobuf2 --tap daggerok/protobuf2 --set-name protobuf2
 ----
 
@@ -65,8 +74,6 @@ end
 # This may change in the future, so we recommend setting EDITOR,
 # or HOMEBREW_EDITOR to your preferred text editor.
 ----
-
-////
 
 [source, bash]
 ----
