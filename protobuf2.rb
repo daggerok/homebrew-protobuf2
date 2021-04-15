@@ -1,6 +1,6 @@
 require 'formula'
 
-cask "protobuf2" do
+class Protobuf2 < Formula
   version "2.5.0"
   name "Google Protobuf v#{version}"
   desc "Google Protocol Buffers v#{version}"
@@ -42,4 +42,3 @@ cask "protobuf2" do
   #   (testpath/"test.proto").write testdata
   # end
 end
-
